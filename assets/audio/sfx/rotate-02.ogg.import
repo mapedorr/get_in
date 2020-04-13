@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rotate-02.ogg-5329948e38234ec6b272cb30517fd462.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/rotate-02.ogg"
+dest_files=[ "res://.import/rotate-02.ogg-5329948e38234ec6b272cb30517fd462.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

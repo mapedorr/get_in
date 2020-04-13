@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/main/Game.gd" type="Script" id=1]
+[ext_resource path="res://src/levels/Level1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/gui/GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/managers/AudioManager.tscn" type="PackedScene" id=4]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+level = ExtResource( 2 )
+
+[node name="World" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="." instance=ExtResource( 3 )]
+
+[node name="AudioManager" parent="." instance=ExtResource( 4 )]

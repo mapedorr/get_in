@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/levels/Level.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/world/background.png" type="Texture" id=2]
+[ext_resource path="res://src/cell/Cell.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/levels/Level4.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 1 )
+next_level = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="GridContainer" type="Control" parent="."]
+anchor_right = 1.0
+rect_min_size = Vector2( 1024, 600 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="VBoxContainer" parent="GridContainer/CenterContainer"]
+margin_left = 339.0
+margin_top = 232.0
+margin_right = 685.0
+margin_bottom = 368.0
+mouse_filter = 2
+
+[node name="Row1" type="HBoxContainer" parent="GridContainer/CenterContainer/Grid"]
+margin_right = 346.0
+margin_bottom = 66.0
+mouse_filter = 2
+
+[node name="Cell0" parent="GridContainer/CenterContainer/Grid/Row1" instance=ExtResource( 3 )]
+
+[node name="Cell1" parent="GridContainer/CenterContainer/Grid/Row1" instance=ExtResource( 3 )]
+margin_left = 70.0
+margin_right = 136.0
+
+[node name="Cell2" parent="GridContainer/CenterContainer/Grid/Row1" instance=ExtResource( 3 )]
+margin_left = 140.0
+margin_right = 206.0
+cell_type = 2
+direction = 1
+
+[node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row1" instance=ExtResource( 3 )]
+margin_left = 210.0
+margin_right = 276.0
+
+[node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row1" instance=ExtResource( 3 )]
+margin_left = 280.0
+margin_right = 346.0
+cell_type = 6
+link_row = 1
+link_col = 2
+direction = 1
+
+[node name="Row2" type="HBoxContainer" parent="GridContainer/CenterContainer/Grid"]
+margin_top = 70.0
+margin_right = 346.0
+margin_bottom = 136.0
+mouse_filter = 2
+
+[node name="Cell0" parent="GridContainer/CenterContainer/Grid/Row2" instance=ExtResource( 3 )]
+
+[node name="Cell1" parent="GridContainer/CenterContainer/Grid/Row2" instance=ExtResource( 3 )]
+margin_left = 70.0
+margin_right = 136.0
+cell_type = 1
+
+[node name="Cell2" parent="GridContainer/CenterContainer/Grid/Row2" instance=ExtResource( 3 )]
+margin_left = 140.0
+margin_right = 206.0
+
+[node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row2" instance=ExtResource( 3 )]
+margin_left = 210.0
+margin_right = 276.0
+
+[node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row2" instance=ExtResource( 3 )]
+margin_left = 280.0
+margin_right = 346.0
+cell_type = 5
+link_row = 2
+link_col = 1
+direction = 1
+
+[node name="Sockets" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Plugs" type="Node2D" parent="."]
+z_index = 20
