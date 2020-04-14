@@ -46,6 +46,7 @@ config/icon="res://icon.png"
 
 Events="*res://src/managers/Events.gd"
 Constants="*res://src/managers/Constants.gd"
+Data="*res://src/managers/Data.gd"
 
 [display]
 

@@ -59,7 +59,6 @@ func set_initial(cfg: Dictionary) -> void:
 
 
 func move() -> void:
-	# Mover el enchufe si la tomacorriente que se giró es su vínculo
 	var offset: Vector2 = Vector2(33, 39)
 	var distance: int = 1
 	

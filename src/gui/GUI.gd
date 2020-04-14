@@ -28,7 +28,6 @@ func show_win() -> void:
 
 func show_lose() -> void:
 	$Control/Label.text = 'no more moves!'
-	_finish_level()
 
 
 func show_alert() -> void:

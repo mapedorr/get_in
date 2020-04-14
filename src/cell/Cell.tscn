@@ -26,3 +26,17 @@ self_modulate = Color( 1, 1, 1, 0.498039 )
 points = PoolVector2Array( 33, 33, 33, 33 )
 width = 3.0
 default_color = Color( 1, 0.4, 0.4, 1 )
+
+[node name="Id" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -18.0
+margin_bottom = -4.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "row:6121 col:0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

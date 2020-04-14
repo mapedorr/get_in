@@ -10,6 +10,7 @@ var _plugs_to_move: Array = []
 var _rotated_sockets: int = 0
 var _last_move: bool = false
 var _level_won: bool = false
+var _plugs_moved: int = 0
 
 onready var _grid: VBoxContainer = $GridContainer/CenterContainer/Grid
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
@@ -77,6 +78,7 @@ func _move_plug(socket: Socket) -> void:
 	var plug: Plug
 	for plug in $Plugs.get_children():
 		if plug.link == Vector2(col, row):
+			# Mover el enchufe si la tomacorriente que se giró es su vínculo
 			_plugs_to_move.append(plug)
 #			plug.move()
 	
@@ -96,12 +98,17 @@ func _move_plug(socket: Socket) -> void:
 		var socket_name: String = 'Socket%d%d' % [ row, col ]
 		if $Sockets.has_node(socket_name):
 			var touched_socket: Socket = $Sockets.get_node(socket_name)
+			
 			if not touched_socket.linked:
 				touched_socket.touched_by = socket
 				touched_socket.dir = 1
+				
+				touched_socket.shake()
 			else:
 				socket.dir = -1
 				_rotated_sockets = 0
+				
+				Data.data_sumi('moves', -1)
 				_plugs_to_move.clear()
 				Events.emit_signal('play_requested', 'Sfx', 'Error')
 			return
@@ -109,22 +116,27 @@ func _move_plug(socket: Socket) -> void:
 	if _plugs_to_move.size() == _rotated_sockets:
 		for plug in _plugs_to_move:
 			plug.move()
+			yield(get_tree().create_timer(0.3), 'timeout')
+
 	_rotated_sockets = 0
 
 
 func _plug_moved(row: int, col: int) -> void:
-	_plugs_to_move.pop_front()
-	
-	if _last_move:
-		_disable_sockets()
-		yield(get_tree().create_timer(0.6), 'timeout')
+	_plugs_moved += 1
 
-		if not _level_won:
-			Events.emit_signal('level_lost')
-			return
-	
-	if _plugs_to_move.size() == 0:
+	if _plugs_moved == _plugs_to_move.size():
+		_plugs_to_move.clear()
+		_plugs_moved = 0
+		
 		Constants.moving_piece = false
+		
+		if _plugs_excited >= 1:
+			if _is_last_move():
+				_disable_sockets()
+				yield(get_tree().create_timer(0.6), 'timeout')
+		
+				if not _level_won:
+					Events.emit_signal('level_lost')
 
 
 func _plug_excited(link: Vector2) -> void:
@@ -137,11 +149,21 @@ func _plug_excited(link: Vector2) -> void:
 		_disable_sockets()
 		yield(get_tree().create_timer(0.5), 'timeout')
 		Events.emit_signal('level_won')
-	else:
-		_last_move = true
-		Events.emit_signal('last_move_alerted')
+	
+	if _plugs_to_move.empty():
+		# En caso de que esto ocurra como último evento (o sea que no vayan a
+		# moverse más clavijas)
+		_is_last_move()
 
 
 func _disable_sockets() -> void:
 	for socket in $Sockets.get_children():
 		(socket as Socket).disable()
+
+
+func _is_last_move() -> bool:
+	if not _last_move:
+		_last_move = true
+		Events.emit_signal('last_move_alerted')
+		return false
+	return true

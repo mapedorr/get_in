@@ -19,10 +19,10 @@ enum Direction {
 }
 
 export(Type) var cell_type = Type.EMPTY setget set_cell_type
-export(bool) var is_out = true
+export(Direction) var direction setget set_direction
 export(int) var link_row = -1 setget set_link_row
 export(int) var link_col = -1 setget set_link_col
-export(Direction) var direction
+export(bool) var is_out = true
 export(bool) var refresh setget set_refresh
 
 var s2: Resource = load('res://assets/sprites/editor/cell_s2.png')
@@ -37,6 +37,8 @@ var _center: Vector2 = Vector2.ONE * (rect_size / 2)
 func _ready() -> void:
 	$Line2D.set_point_position(0, _center)
 	$Line2D.set_point_position(1, _center)
+	
+	_update_id()
 
 
 func get_world_position() -> Vector2:
@@ -63,20 +65,24 @@ func set_cell_type(new_type: int) -> void:
 			$TypePreview.texture = null
 			self.link_row = -1
 			self.link_col = -1
+	
+	_update_id()
+
+
+func set_direction(val: int) -> void:
+	direction = val
+	
+	_update_line()
 
 
 func set_link_row(val: int) -> void:
 	link_row = val
-	
-	if not get_parent() or not get_parent().name: return
-	
+
 	_update_line()
 
 
 func set_link_col(val: int) -> void:
 	link_col = val
-	
-	if not get_parent() or not get_parent().name: return
 
 	_update_line()
 
@@ -88,7 +94,26 @@ func set_refresh(val: bool) -> void:
 
 
 func _update_line() -> void:
+	if not get_parent() or not get_parent().name: return
+
 	var target: Vector2 = _center
+	
+	if cell_type == Type.SOCKET_2 \
+		or cell_type == Type.SOCKET_2T \
+		or cell_type == Type.SOCKET_3 \
+		or cell_type == Type.SOCKET_3T:
+			match direction:
+				Direction.UP:
+					target.y -= rect_size.x / 2
+				Direction.DOWN:
+					target.y += rect_size.x / 2
+				Direction.LEFT:
+					target.x -= rect_size.x / 2
+				Direction.RIGHT:
+					target.x += rect_size.x / 2
+	
+			$Line2D.set_point_position(1, target)
+			return
 
 	if link_row >= 0:
 		if direction == Direction.UP:
@@ -105,3 +130,9 @@ func _update_line() -> void:
 		$Line2D.set_point_position(1, target)
 	else:
 		$Line2D.set_point_position(1, _center)
+
+
+func _update_id() -> void:
+	if not get_parent() or not get_parent().name: return
+	
+	$Id.text = 'r%d,c%d' % [ int(get_parent().name), int(name) ]

@@ -5,6 +5,8 @@ export(Texture) var socket_2
 export(Texture) var socket_2t
 export(Texture) var socket_3
 export(Texture) var socket_3t
+export (float) var shake_amount = 2
+export (float) var shake_duration = 15
 
 var dir: int = 0 setget set_dir, get_dir
 var linked: bool = false
@@ -15,6 +17,10 @@ var _row: int setget ,get_row
 var _col: int setget ,get_col
 var _touch: bool = false setget ,get_touch
 var _animate: bool = false
+var _shaking: bool = false
+var _shake_time: int = 0
+
+onready var _dflt_pos: Vector2 = position
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	_animate = true
@@ -36,6 +42,24 @@ func _ready() -> void:
 	connect('mouse_entered', self, '_change_mouse', [ true ])
 	connect('mouse_exited', self, '_change_mouse')
 	connect('input_event', self, '_handle_input')
+	
+	# Deshabilitar el process mientras no vaya a ser usado
+	set_process(false)
+
+
+func _process(delta: float) -> void:
+	if _shaking:
+		_shake_time += 1
+		set_position(
+			_dflt_pos + Vector2(rand_range(-1.0, 1.0) * shake_amount,
+			rand_range(-1.0, 1.0) * shake_amount)
+		)
+
+		if _shake_time >= shake_duration:
+			_shaking = false
+			_shake_time = 0
+			set_position(_dflt_pos)
+			set_process(false)
 
 
 func set_initial(cfg: Dictionary) -> void:
@@ -61,7 +85,6 @@ func get_touch() -> bool:
 
 func set_dir(new_val: int) -> void:
 	dir = wrapi(dir + new_val, 0, 4)
-	print('%s viendo hacia %d' % [name, dir])
 
 	if not _animate:
 		match dir:
@@ -91,6 +114,11 @@ func disable() -> void:
 	$CollisionShape2D.disabled = true
 
 
+func shake() -> void:
+	_shaking = true
+	set_process(true)
+
+
 func _change_mouse(turn: bool = false) -> void:
 	# Cambiar el cursor por el de la mano apretando:
 	if turn:
@@ -104,6 +132,8 @@ func _handle_input(viewport, event, shape_idx):
 		if not Constants.moving_piece and event.is_pressed():
 			Constants.moving_piece = true
 			self.dir = 1
+			
+			Data.data_sumi('moves', 1)
 
 
 func _rotate(target: int, backwards: bool = false) -> void:
@@ -127,6 +157,7 @@ func _rotate(target: int, backwards: bool = false) -> void:
 		Events.emit_signal('socket_rotated', self)
 	elif touched_by:
 		touched_by.dir = -1
-		touched_by = null
 	else:
 		Constants.moving_piece = false
+
+	touched_by = null
