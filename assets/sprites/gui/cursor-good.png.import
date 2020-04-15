@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor-pointing_hand.png-7c5e864fce1316f61aa03493d54d3f84.stex"
+path="res://.import/cursor-good.png-e733e8b414b1beb87ce2450c5e2a1e26.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/cursor-pointing_hand.png"
-dest_files=[ "res://.import/cursor-pointing_hand.png-7c5e864fce1316f61aa03493d54d3f84.stex" ]
+source_file="res://assets/sprites/gui/cursor-good.png"
+dest_files=[ "res://.import/cursor-good.png-e733e8b414b1beb87ce2450c5e2a1e26.stex" ]
 
 [params]
 

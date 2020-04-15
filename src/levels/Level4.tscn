@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/world/background.png" type="Texture" id=2]
 [ext_resource path="res://src/cell/Cell.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/levels/Level5.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
+next_level = ExtResource( 4 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 0, -1 )
@@ -54,9 +56,10 @@ margin_right = 206.0
 margin_left = 210.0
 margin_right = 276.0
 cell_type = 6
+direction = 2
 link_row = 3
 link_col = 3
-direction = 2
+is_out = false
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 280.0
@@ -184,7 +187,7 @@ direction = 1
 margin_left = 280.0
 margin_right = 346.0
 cell_type = 4
-direction = 2
+direction = 3
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 350.0
@@ -202,9 +205,9 @@ margin_right = 556.0
 margin_left = 560.0
 margin_right = 626.0
 cell_type = 6
+direction = 1
 link_row = 3
 link_col = 4
-direction = 1
 
 [node name="Row4" type="HBoxContainer" parent="GridContainer/CenterContainer/Grid"]
 margin_top = 280.0
@@ -314,6 +317,7 @@ margin_right = 346.0
 cell_type = 5
 link_row = 4
 link_col = 4
+turned = true
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row6" instance=ExtResource( 3 )]
 margin_left = 350.0

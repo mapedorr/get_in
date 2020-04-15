@@ -2,6 +2,7 @@ class_name Plug
 extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(Texture) var plug_2
+export(Texture) var plug_2a
 export(Texture) var plug_3
 
 var link: Vector2
@@ -14,14 +15,20 @@ var _first_move: bool = true
 var _row: int
 var _col: int
 var _level: Node2D
+var _distance: int setget set_distance
+var _turned: bool = false
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
 	name = 'Plug%d%d' % [ _row, _col ]
 	global_position = _init_pos - (Vector2.ONE * 33)
+	
+	_calc_steps()
 
 	match _type:
 		Cell.Type.PLUG_2:
 			$Sprite.texture = plug_2
+			if _turned:
+				$Sprite.texture = plug_2a
 		Cell.Type.PLUG_3:
 			$Sprite.texture = plug_3
 
@@ -48,14 +55,30 @@ func set_initial(cfg: Dictionary) -> void:
 	_col = cfg.col
 	_level = cfg.level
 	link = cfg.link
+	_turned = cfg.turned
 	
 	match _dir:
 		Cell.Direction.LEFT:
 			rotation_degrees = -90
+			$Steps.rect_rotation = 90
+			$Steps.rect_position.x += 20
+			$Steps.rect_position.y += 14
 		Cell.Direction.DOWN:
 			rotation_degrees = -180
+			$Steps.rect_rotation = 180
+			$Steps.rect_position.x += 12
+			$Steps.rect_position.y += 30
 		Cell.Direction.RIGHT:
 			rotation_degrees = -270
+			$Steps.rect_rotation = 270
+			$Steps.rect_position.x -= 6
+			$Steps.rect_position.y += 26
+
+
+func set_distance(val: int) -> void:
+	_distance = val
+	
+	$Steps.text = String(_distance)
 
 
 func move() -> void:
@@ -103,10 +126,12 @@ func _moved(obj: Node2D, key: NodePath) -> void:
 	# Ver si el tomacorriente vínculo ya está al lado
 	var r:int = 0
 	var c:int = 0
+	var distance: int = 0
 
 	match _dir:
 			Cell.Direction.UP:
 				r = -1
+				distance = _row - link.x
 			Cell.Direction.LEFT:
 				c = -1
 			Cell.Direction.RIGHT:
@@ -117,3 +142,21 @@ func _moved(obj: Node2D, key: NodePath) -> void:
 	if Vector2(_col + c, _row + r) == link:
 		Events.emit_signal('play_requested', 'Sfx', 'Moan')
 		Events.emit_signal('plug_excited', link)
+		$Steps.hide()
+	else:
+		self._distance -= 1
+
+
+func _calc_steps() -> void:
+	match _dir:
+		Cell.Direction.UP:
+			self._distance = _row - link.y - 1
+		Cell.Direction.LEFT:
+			self._distance = _col - link.x - 1
+		Cell.Direction.RIGHT:
+			self._distance = _col + link.x - 1
+		Cell.Direction.DOWN:
+			self._distance = _row + link.y - 1
+
+	if _out:
+		self._distance += 1

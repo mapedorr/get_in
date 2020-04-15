@@ -51,7 +51,8 @@ func _ready() -> void:
 						dir = c.direction,
 						row = row_i,
 						col = col_i,
-						level = self
+						level = self,
+						turned = c.turned
 					})
 					$Plugs.add_child(p)
 
@@ -162,7 +163,7 @@ func _disable_sockets() -> void:
 
 
 func _is_last_move() -> bool:
-	if not _last_move:
+	if not _last_move and _plugs_excited != $Sockets.get_child_count():
 		_last_move = true
 		Events.emit_signal('last_move_alerted')
 		return false

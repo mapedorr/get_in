@@ -53,6 +53,8 @@ margin_right = 206.0
 [node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 210.0
 margin_right = 276.0
+direction = 2
+is_out = false
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 280.0
@@ -61,10 +63,13 @@ cell_type = 6
 direction = 2
 link_row = 3
 link_col = 4
+is_out = false
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 350.0
 margin_right = 416.0
+direction = 2
+is_out = false
 
 [node name="Cell6" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 420.0
@@ -165,10 +170,6 @@ margin_bottom = 276.0
 mouse_filter = 2
 
 [node name="Cell0" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
-cell_type = 6
-direction = 3
-link_row = 3
-link_col = 3
 
 [node name="Cell1" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 70.0
@@ -181,7 +182,7 @@ margin_right = 206.0
 [node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 210.0
 margin_right = 276.0
-cell_type = 4
+direction = 2
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 280.0
@@ -192,8 +193,7 @@ direction = 2
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 350.0
 margin_right = 416.0
-cell_type = 4
-direction = 1
+direction = 2
 
 [node name="Cell6" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 420.0
@@ -206,10 +206,6 @@ margin_right = 556.0
 [node name="Cell8" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 560.0
 margin_right = 626.0
-cell_type = 6
-direction = 1
-link_row = 3
-link_col = 5
 
 [node name="Row4" type="HBoxContainer" parent="GridContainer/CenterContainer/Grid"]
 margin_top = 280.0
@@ -231,17 +227,18 @@ margin_right = 206.0
 margin_left = 210.0
 margin_right = 276.0
 cell_type = 3
-direction = 3
+direction = 2
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row4" instance=ExtResource( 3 )]
 margin_left = 280.0
 margin_right = 346.0
-cell_type = 1
+cell_type = 3
+direction = 2
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row4" instance=ExtResource( 3 )]
 margin_left = 350.0
 margin_right = 416.0
-cell_type = 1
+cell_type = 3
 
 [node name="Cell6" parent="GridContainer/CenterContainer/Grid/Row4" instance=ExtResource( 3 )]
 margin_left = 420.0
@@ -314,14 +311,15 @@ margin_right = 206.0
 [node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row6" instance=ExtResource( 3 )]
 margin_left = 210.0
 margin_right = 276.0
+cell_type = 5
+link_row = 4
+link_col = 3
+is_out = false
+turned = true
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row6" instance=ExtResource( 3 )]
 margin_left = 280.0
 margin_right = 346.0
-cell_type = 5
-link_row = 4
-link_col = 4
-is_out = false
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row6" instance=ExtResource( 3 )]
 margin_left = 350.0
@@ -358,13 +356,14 @@ margin_right = 206.0
 [node name="Cell3" parent="GridContainer/CenterContainer/Grid/Row7" instance=ExtResource( 3 )]
 margin_left = 210.0
 margin_right = 276.0
-cell_type = 5
-link_row = 4
-link_col = 3
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row7" instance=ExtResource( 3 )]
 margin_left = 280.0
 margin_right = 346.0
+cell_type = 5
+link_row = 4
+link_col = 4
+is_out = false
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row7" instance=ExtResource( 3 )]
 margin_left = 350.0

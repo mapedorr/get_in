@@ -24,6 +24,7 @@ export(int) var link_row = -1 setget set_link_row
 export(int) var link_col = -1 setget set_link_col
 export(bool) var is_out = true
 export(bool) var refresh setget set_refresh
+export(bool) var turned = false
 
 var s2: Resource = load('res://assets/sprites/editor/cell_s2.png')
 var s2t: Resource = load('res://assets/sprites/editor/cell_s2t.png')
@@ -113,7 +114,10 @@ func _update_line() -> void:
 					target.x += rect_size.x / 2
 	
 			$Line2D.set_point_position(1, target)
+			$Line2D.default_color = Color.aqua
 			return
+
+	$Line2D.default_color = Color.crimson
 
 	if link_row >= 0:
 		if direction == Direction.UP:
