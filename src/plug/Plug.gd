@@ -43,7 +43,7 @@ func _ready() -> void:
 			Cell.Direction.DOWN:
 				position.y -= 54
 
-	$Tween.connect('tween_started', self, '_play_move')
+#	$Tween.connect('tween_started', self, '_play_move')
 	$Tween.connect('tween_completed', self, '_moved')
 
 func set_initial(cfg: Dictionary) -> void:
@@ -102,6 +102,10 @@ func move() -> void:
 			_row += distance # Mejorar para que sepa límite del nivel
 
 	var target: Vector2 = _level.get_cell_pos(_row, _col) as Vector2
+	
+	if Vector2(_row, _col) == link:
+		Events.emit_signal('plug_moved')
+		return
 
 	$Tween.interpolate_property(
 		self,
@@ -121,7 +125,7 @@ func _play_move(obj: Node2D, key: NodePath) -> void:
 
 
 func _moved(obj: Node2D, key: NodePath) -> void:
-	Events.emit_signal('plug_moved', _row, _col)
+	Events.emit_signal('plug_moved')
 
 	# Ver si el tomacorriente vínculo ya está al lado
 	var r:int = 0
@@ -140,8 +144,8 @@ func _moved(obj: Node2D, key: NodePath) -> void:
 				r = 1
 
 	if Vector2(_col + c, _row + r) == link:
-		Events.emit_signal('play_requested', 'Sfx', 'Moan')
 		Events.emit_signal('plug_excited', link)
+		Events.emit_signal('play_requested', 'Sfx', 'Moan')
 		$Steps.hide()
 	else:
 		self._distance -= 1

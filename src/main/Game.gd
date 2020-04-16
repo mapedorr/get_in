@@ -2,7 +2,7 @@ extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
 export(PackedScene) var level
 
-var _current_level: Node2D
+var _current_level: Node
 var _current_scene: PackedScene
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Funciones ░░░░
 func _ready() -> void:
@@ -28,7 +28,7 @@ func load_level(scene: PackedScene) -> void:
 	$World.add_child(_current_level)
 	# Poner el contador de movimientos a 0 para el nuevo nivel
 	Data.data_set('moves', 0)
-	Events.emit_signal('level_started')
+	Events.emit_signal('level_started', int(_current_level.name))
 
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 

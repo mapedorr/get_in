@@ -5,7 +5,7 @@
 [ext_resource path="res://src/cell/Cell.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/levels/Level5.tscn" type="PackedScene" id=4]
 
-[node name="Level" type="Node2D"]
+[node name="Level4" type="Node2D"]
 script = ExtResource( 1 )
 next_level = ExtResource( 4 )
 
@@ -15,6 +15,7 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="GridContainer" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 rect_min_size = Vector2( 1024, 600 )
 mouse_filter = 2
@@ -59,7 +60,6 @@ cell_type = 6
 direction = 2
 link_row = 3
 link_col = 3
-is_out = false
 
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row0" instance=ExtResource( 3 )]
 margin_left = 280.0
@@ -187,7 +187,6 @@ direction = 1
 margin_left = 280.0
 margin_right = 346.0
 cell_type = 4
-direction = 3
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row3" instance=ExtResource( 3 )]
 margin_left = 350.0
@@ -208,6 +207,7 @@ cell_type = 6
 direction = 1
 link_row = 3
 link_col = 4
+is_out = false
 
 [node name="Row4" type="HBoxContainer" parent="GridContainer/CenterContainer/Grid"]
 margin_top = 280.0
@@ -232,8 +232,8 @@ margin_right = 276.0
 [node name="Cell4" parent="GridContainer/CenterContainer/Grid/Row4" instance=ExtResource( 3 )]
 margin_left = 280.0
 margin_right = 346.0
-cell_type = 1
-direction = 1
+cell_type = 3
+direction = 2
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row4" instance=ExtResource( 3 )]
 margin_left = 350.0
@@ -317,7 +317,6 @@ margin_right = 346.0
 cell_type = 5
 link_row = 4
 link_col = 4
-turned = true
 
 [node name="Cell5" parent="GridContainer/CenterContainer/Grid/Row6" instance=ExtResource( 3 )]
 margin_left = 350.0

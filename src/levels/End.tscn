@@ -1,0 +1,184 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/DynamicFont/AweMono-GUI-30.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/sprites/gui/carenalga.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/world/background.png" type="Texture" id=3]
+[ext_resource path="res://src/levels/End.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.941176, 0.964706, 0.941176, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="Animation" id=1]
+resource_name = "Show"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Carenalga:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 6 ),
+"transitions": PoolRealArray( 0.5, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 208 ), Vector2( 0, 208 ), Vector2( -1696, 208 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Mapedorr:self_modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5.5, 6.7 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Godot:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 7.3, 8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Godot:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 8, 8.5, 9, 9.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 440, 504 ), Vector2( 440, 504 ), Vector2( 400, 504 ), Vector2( 344, 504 ), Vector2( 312, 504 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Godot:text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 8, 8.5, 9, 9.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "", "made", "made with", "made with GODOT", "<3 made with GODOT <3" ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Godot:rect_size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 8, 8.5, 9, 9.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 144, 26 ), Vector2( 144, 26 ), Vector2( 224, 26 ), Vector2( 336, 26 ), Vector2( 400, 26 ) ]
+}
+
+[node name="End" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 299.835 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 512.0 ]
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_top = 192.0
+margin_bottom = 218.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.941176, 0.964706, 0.941176, 1 )
+text = "A short puzzle game made by"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Carenalga" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -92.0
+margin_right = 1838.0
+margin_bottom = 92.0
+texture = ExtResource( 2 )
+patch_margin_left = 65
+patch_margin_top = 171
+patch_margin_right = 813
+patch_margin_bottom = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mapedorr" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_top = 432.0
+margin_bottom = 458.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.941176, 0.964706, 0.941176, 1 )
+text = "@mapedorr { a.k.a. carenalga }"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Godot" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -96.0
+margin_right = 71.9999
+margin_bottom = -70.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.133333, 0.137255, 0.137255, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Show = SubResource( 1 )

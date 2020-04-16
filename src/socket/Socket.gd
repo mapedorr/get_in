@@ -147,7 +147,7 @@ func _rotate(target: int, backwards: bool = false) -> void:
 		Tween.EASE_OUT
 	)
 	$Tween.start()
-	
+
 	if not backwards:
 		Events.emit_signal('play_requested', 'Sfx', 'Rotate')
 

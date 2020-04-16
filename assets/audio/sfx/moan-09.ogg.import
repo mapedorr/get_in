@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/moan-09.ogg-f6ef00622c899ea246246bdd9ac41585.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/moan-09.ogg"
+dest_files=[ "res://.import/moan-09.ogg-f6ef00622c899ea246246bdd9ac41585.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

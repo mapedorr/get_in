@@ -1,3 +1,4 @@
+tool
 class_name Level
 extends Node2D
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ Variables ░░░░
@@ -122,7 +123,7 @@ func _move_plug(socket: Socket) -> void:
 	_rotated_sockets = 0
 
 
-func _plug_moved(row: int, col: int) -> void:
+func _plug_moved() -> void:
 	_plugs_moved += 1
 
 	if _plugs_moved == _plugs_to_move.size():
